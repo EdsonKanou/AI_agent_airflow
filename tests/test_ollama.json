@@ -1,0 +1,5 @@
+{
+  "model": "codellama",
+  "prompt": "Write a Python function that adds two numbers",
+  "stream": false
+}

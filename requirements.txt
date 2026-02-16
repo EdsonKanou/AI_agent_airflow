@@ -1,0 +1,17 @@
+# Validation de code Python
+ast-comments==1.2.1
+black==24.1.1
+pylint==3.0.3
+
+# Tests
+pytest==7.4.4
+pytest-cov==4.1.0
+
+# Manipulation de fichiers
+pyyaml==6.0.1
+
+# Client Airflow (pour valider les DAG)
+#apache-airflow==2.8.1
+
+# Pour l'IA locale (on installera Ollama séparément)
+# ollama-python==0.1.6  # On verra au Jour 3
