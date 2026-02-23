@@ -1,5 +1,4 @@
-```python
-from datetime import timedelta
+from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 from airflow.operators.python_operator import PythonOperator
@@ -13,23 +12,17 @@ default_args = {
 }
 
 dag = DAG(
-    dag_id='hello_world_dag',
+    'hello_world',
     default_args=default_args,
-    schedule_interval='@daily',
-    tags=['test', 'hello'],
+    schedule_interval=timedelta(days=1),
 )
 
-task1 = PythonOperator(
-    task_id='print_hello',
-    python_callable=lambda: print('Hello'),
+def print_hello_world():
+    """Print hello world to the console"""
+    print("Hello World!")
+
+print_hello_world_task = PythonOperator(
+    task_id='print_hello_world',
+    python_callable=print_hello_world,
     dag=dag,
 )
-
-task2 = BashOperator(
-    task_id='print_world',
-    bash_command='echo "World"',
-    dag=dag,
-)
-
-task1 >> task2
-```

@@ -4,6 +4,7 @@ Client pour communiquer avec Ollama.
 import requests
 import json
 from typing import Dict, Any, Optional
+from .utils.code_cleaner import clean_and_validate
 from .config import OLLAMA_BASE_URL, OLLAMA_MODEL, OLLAMA_TIMEOUT, GENERATION_CONFIG
 
 
@@ -85,6 +86,41 @@ class OllamaClient:
             raise ValueError(
                 f"❌ Erreur HTTP {e.response.status_code}: {e.response.text}"
             )
+            
+    def generate_dag_code(self, prompt: str, **kwargs) -> tuple[str, bool, str]:
+        """
+        Générer du code DAG et le nettoyer automatiquement.
+        
+        Version spécialisée de generate() qui :
+        - Génère le code
+        - Nettoie le markdown et les explications
+        - Valide la structure
+        
+        Args:
+            prompt: Prompt de génération
+            **kwargs: Paramètres de génération
+        
+        Returns:
+            tuple[str, bool, str]: (code_nettoyé, is_valid, error_message)
+        
+        Example:
+            >>> client = OllamaClient()
+            >>> code, valid, error = client.generate_dag_code(prompt)
+            >>> if valid:
+            ...     print("Code prêt à sauvegarder")
+        """
+        # Générer le code brut
+        raw_code = self.generate(prompt, **kwargs)
+        
+        # Nettoyer et valider
+        clean_code, is_valid, error_msg = clean_and_validate(raw_code)
+        
+        if not is_valid:
+            print(f"⚠️  Code généré invalide : {error_msg}")
+            print("💡 Le code sera quand même retourné pour correction manuelle")
+        
+        return clean_code, is_valid, error_msg
+
     
     def chat(self, messages: list, **kwargs) -> str:
         """

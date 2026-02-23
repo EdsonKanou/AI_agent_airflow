@@ -32,3 +32,10 @@ Thumbs.db
 
 # Docker
 postgres-db-volume/
+
+# RAG databases
+rag_database/
+test_rag_db/
+*.db
+*.sqlite
+*.chroma

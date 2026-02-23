@@ -15,3 +15,9 @@ pyyaml==6.0.1
 
 # Pour l'IA locale (on installera Ollama séparément)
 # ollama-python==0.1.6  # On verra au Jour 3
+
+# === RAG (Retrieval-Augmented Generation) ===
+chromadb==0.4.22                  # Base de données vectorielle locale
+sentence-transformers==2.3.1      # Modèles d'embeddings
+
+numpy==1.26.4
