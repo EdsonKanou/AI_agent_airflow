@@ -58,7 +58,7 @@ class DAGGenerator:
             self.retriever = None
             print("[Generator] RAG désactivé")
     
-    def generate(
+    def generate_last(
         self,
         description: str,
         requirements: Optional[Dict[str, Any]] = None
@@ -156,14 +156,14 @@ class DAGGenerator:
         return clean_code, is_valid, error_msg, metadata
     
     
-    def generate_and_save(
+    def generate(
         self,
         description: str,
         requirements: Optional[Dict[str, Any]] = None,
         filename: Optional[str] = None
     ) -> Tuple[str, bool, str, Dict[str, Any]]:
         """
-        Générer un DAG complet.
+        Générer un DAG complet and SAVE.
         
         Args:
             description: Description en langage naturel du pipeline

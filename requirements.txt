@@ -21,3 +21,7 @@ chromadb==0.4.22                  # Base de données vectorielle locale
 sentence-transformers==2.3.1      # Modèles d'embeddings
 
 numpy==1.26.4
+
+# === Frontend ===
+streamlit==1.31.0
+plotly==5.18.0  # Pour les graphiques
